@@ -1,4 +1,3 @@
-import type { AxiosRequestConfig } from 'axios'
 import { Client } from './client'
 import { NdjsonParser } from './ndjson-parser'
 
@@ -9,7 +8,7 @@ class Games {
     this._client = client
   }
 
-  current(params: Partial<AxiosRequestConfig<any>>) {
+  current(params: any) {
     const path = 'api/account/playing'
 
     return this._client.get(path, {}, params)
@@ -30,7 +29,7 @@ class Games {
 
     return this._client
       .get(path, headers, params)
-      .then(({ data }) => JSON.parse(data))
+      .then(async response => await response.json())
   }
 
   listByIds(ids: string[], options = {}) {
@@ -41,9 +40,8 @@ class Games {
       Accept: 'application/x-ndjson',
     }
 
-    return this._client
-      .post(path, headers, idString, options)
-      .then(({ data }) => (data === '' ? [] : NdjsonParser.parse(data)))
+    const client = this._client.post(path, headers, idString, options)
+    return NdjsonParser.parse2(client)
   }
 
   listByUser(username: string, params = {}) {
@@ -53,9 +51,8 @@ class Games {
       Accept: 'application/x-ndjson',
     }
 
-    return this._client
-      .get(path, headers, params)
-      .then(({ data }) => (data === '' ? [] : NdjsonParser.parse(data)))
+    const client = this._client.get(path, headers, params)
+    return NdjsonParser.parse2(client)
   }
 }
 

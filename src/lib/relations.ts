@@ -14,9 +14,8 @@ class Relations {
       Accept: 'application/x-ndjson',
     }
 
-    return this._client
-      .get(path, headers)
-      .then(({ data }) => (data === '' ? [] : NdjsonParser.parse(data)))
+    const client = this._client.get(path, headers)
+    return NdjsonParser.parse2(client)
   }
 
   following(username: string) {
@@ -25,9 +24,8 @@ class Relations {
       Accept: 'application/x-ndjson',
     }
 
-    return this._client
-      .get(path, headers)
-      .then(({ data }) => (data === '' ? [] : NdjsonParser.parse(data)))
+    const client = this._client.get(path, headers)
+    return NdjsonParser.parse2(client)
   }
 }
 

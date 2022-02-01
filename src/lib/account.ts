@@ -13,7 +13,9 @@ class Account {
       Accept: 'application/json',
     }
 
-    return this._client.get(path, headers).then(({ data }) => JSON.parse(data))
+    return this._client
+      .get(path, headers)
+      .then(async response => await response.json())
   }
 
   email(): Promise<any> {
@@ -22,7 +24,9 @@ class Account {
       Accept: 'application/json',
     }
 
-    return this._client.get(path, headers).then(({ data }) => JSON.parse(data))
+    return this._client
+      .get(path, headers)
+      .then(async response => await response.json())
   }
 
   preferences(): Promise<any> {
@@ -31,7 +35,9 @@ class Account {
       Accept: 'application/json',
     }
 
-    return this._client.get(path, headers).then(({ data }) => JSON.parse(data))
+    return this._client
+      .get(path, headers)
+      .then(async response => await response.json())
   }
 
   kid(): Promise<any> {
@@ -40,7 +46,9 @@ class Account {
       Accept: 'application/json',
     }
 
-    return this._client.get(path, headers).then(({ data }) => JSON.parse(data))
+    return this._client
+      .get(path, headers)
+      .then(async response => await response.json())
   }
 
   kidOn(): Promise<any> {
@@ -53,7 +61,7 @@ class Account {
 
     return this._client
       .post(path, headers, null, params)
-      .then(({ data }) => JSON.parse(data))
+      .then(async response => await response.json())
   }
 
   kidOff() {
@@ -66,7 +74,7 @@ class Account {
 
     return this._client
       .post(path, headers, null, params)
-      .then(({ data }) => JSON.parse(data))
+      .then(async response => await response.json())
   }
 }
 

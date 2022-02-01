@@ -18,10 +18,9 @@
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
   },
   "dependencies": {
-    "axios": "^0.25.0"
+    "node-fetch": "^3.2.0"
   },
   "devDependencies": {
-    "@types/axios": "^0.14.0",
     "@types/node": "^17.0.14",
     "@typescript-eslint/eslint-plugin": "^5.10.2",
     "@typescript-eslint/parser": "^5.10.2",

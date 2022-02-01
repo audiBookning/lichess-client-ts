@@ -1,55 +1,50 @@
-import axios, {
-  AxiosPromise,
-  AxiosRequestConfig,
-  AxiosRequestHeaders,
-  Method,
-} from 'axios'
+import fetch, { BodyInit, HeadersInit, RequestInit, Response } from 'node-fetch'
+import { URL, URLSearchParams } from 'url'
 
 class Client {
   baseUrl: string
   token: string | null
-  headers: AxiosRequestHeaders
+  headers: HeadersInit
 
   constructor(token: string | null = null) {
     this.token = token
     this.headers = token ? { Authorization: `Bearer ${token}` } : {}
-    this.baseUrl = 'https://lichess.org'
+    this.baseUrl = 'https://lichess.org/'
   }
 
-  get(path: string, headers: AxiosRequestHeaders = {}, params: any = {}) {
-    return this.request('GET', path, headers, {}, params)
+  get(path: string, headers: HeadersInit = {}, params: any = {}) {
+    return this.request('GET', path, headers, null, params)
   }
 
   post(
     path: string,
-    headers: AxiosRequestHeaders,
-    body: any,
+    headers: HeadersInit,
+    body: BodyInit | null,
     params: any = {}
   ) {
     return this.request('POST', path, headers, body, params)
   }
 
   request(
-    method: Method,
+    method: string,
     path: string,
-    headers: AxiosRequestHeaders = {},
-    body: any = null,
+    headers: HeadersInit = {},
+    body: BodyInit | null = null,
     params: any = {}
-  ): AxiosPromise<any> {
-    const url = path
+  ): Promise<Response> {
+    const url = new URL(this.baseUrl + path)
+    url.search = new URLSearchParams(params).toString()
 
     const requestHeaders = Object.assign({}, this.headers, headers)
 
-    const requestOptions: AxiosRequestConfig<any> = {
+    const requestOptions: RequestInit = {
       method,
-      url,
-      baseURL: this.baseUrl,
       headers: requestHeaders,
-      params,
+      body,
     }
-    if (method == 'POST' && body) requestOptions.data = body
+    if (method == 'POST' && body) requestOptions.body = body
 
-    return axios(requestOptions)
+    return fetch(url.toString(), requestOptions)
   }
 }
 

@@ -14,7 +14,9 @@ class Users {
       Accept: 'application/json',
     }
 
-    return this._client.get(path, headers).then(({ data }) => JSON.parse(data))
+    return this._client
+      .get(path, headers)
+      .then(async response => await response.json())
   }
 
   get(username: string) {
@@ -23,7 +25,9 @@ class Users {
       Accept: 'application/json',
     }
 
-    return this._client.get(path, headers).then(({ data }) => JSON.parse(data))
+    return this._client
+      .get(path, headers)
+      .then(async response => await response.json())
   }
 
   /* Missing path in the Lichess API */
@@ -46,9 +50,8 @@ class Users {
       Accept: 'application/x-ndjson',
     }
 
-    return this._client
-      .get(path, headers)
-      .then(({ data }) => (data === '' ? [] : NdjsonParser.parse(data)))
+    const client = this._client.get(path, headers)
+    return NdjsonParser.parse2(client)
   }
 
   listByUsernames(usernames: string[]) {
@@ -60,7 +63,7 @@ class Users {
 
     return this._client
       .post(path, headers, usernameString)
-      .then(({ data }) => JSON.parse(data))
+      .then(async response => await response.json())
   }
 
   liveStreams() {
@@ -69,7 +72,9 @@ class Users {
       Accept: 'application/json',
     }
 
-    return this._client.get(path, headers).then(({ data }) => JSON.parse(data))
+    return this._client
+      .get(path, headers)
+      .then(async response => await response.json())
   }
 
   statusesByUsernames(usernames: string[]) {
@@ -81,7 +86,7 @@ class Users {
 
     return this._client
       .get(path, headers, { ids: usernameString })
-      .then(({ data }) => JSON.parse(data))
+      .then(async response => await response.json())
   }
 }
 
