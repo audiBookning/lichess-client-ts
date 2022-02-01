@@ -1,80 +1,79 @@
-import { Client } from './client'
+import { Response } from 'node-fetch'
+import type { ClienteType } from './client.js'
 
-class Account {
-  _client: Client
+export type AccountType = {
+  account: () => Promise<unknown>
+  email: () => Promise<unknown>
+  preferences: () => Promise<unknown>
+  kid(): Promise<any>
+  kidOn: () => Promise<unknown>
+  kidOff(): Promise<unknown>
+}
 
-  constructor(client: Client) {
-    this._client = client
-  }
+export type AccountFunc = (client: ClienteType) => AccountType
 
-  account() {
-    const path = 'api/account'
-    const headers = {
-      Accept: 'application/json',
-    }
+const Account = (client: ClienteType): AccountType => {
+  const _client = client
 
-    return this._client
-      .get(path, headers)
-      .then(async response => await response.json())
-  }
+  return {
+    account: () => {
+      const path = 'api/account'
+      const headers = {
+        Accept: 'application/json',
+      }
+      return _client
+        .get(path, headers)
+        .then(async (response: Response) => await response.json())
+    },
 
-  email(): Promise<any> {
-    const path = 'api/account/email'
-    const headers = {
-      Accept: 'application/json',
-    }
+    email: () => {
+      const path = 'api/account/email'
+      const headers = {
+        Accept: 'application/json',
+      }
+      return _client
+        .get(path, headers)
+        .then(async (response: Response) => await response.json())
+    },
+    preferences: () => {
+      const path = 'api/account/preferences'
+      const headers = {
+        Accept: 'application/json',
+      }
+      return _client
+        .get(path, headers)
+        .then(async (response: Response) => await response.json())
+    },
+    kid(): Promise<any> {
+      const path = 'api/account/kid'
+      const headers = {
+        Accept: 'application/json',
+      }
+      return _client
+        .get(path, headers)
+        .then(async (response: Response) => await response.json())
+    },
+    kidOn: () => {
+      const path = 'api/account/kid'
+      const headers = {
+        Accept: 'application/json',
+      }
+      const params = { v: true }
 
-    return this._client
-      .get(path, headers)
-      .then(async response => await response.json())
-  }
-
-  preferences(): Promise<any> {
-    const path = 'api/account/preferences'
-    const headers = {
-      Accept: 'application/json',
-    }
-
-    return this._client
-      .get(path, headers)
-      .then(async response => await response.json())
-  }
-
-  kid(): Promise<any> {
-    const path = 'api/account/kid'
-    const headers = {
-      Accept: 'application/json',
-    }
-
-    return this._client
-      .get(path, headers)
-      .then(async response => await response.json())
-  }
-
-  kidOn(): Promise<any> {
-    const path = 'api/account/kid'
-    const headers = {
-      Accept: 'application/json',
-    }
-
-    const params = { v: true }
-
-    return this._client
-      .post(path, headers, null, params)
-      .then(async response => await response.json())
-  }
-
-  kidOff() {
-    const path = 'api/account/kid'
-    const headers = {
-      Accept: 'application/json',
-    }
-
-    const params = { v: false }
-
-    return this._client
-      .post(path, headers, null, params)
-      .then(async response => await response.json())
+      return _client
+        .post(path, headers, null, params)
+        .then(async (response: Response) => await response.json())
+    },
+    kidOff() {
+      const path = 'api/account/kid'
+      const headers = {
+        Accept: 'application/json',
+      }
+      const params = { v: false }
+      return _client
+        .post(path, headers, null, params)
+        .then(async response => await response.json())
+    },
   }
 }
 

@@ -1,37 +1,16 @@
-import { Account } from './lib/account'
-import { Client } from './lib/client'
-import { Games } from './lib/games'
-import { Relations } from './lib/relations'
-import { Users } from './lib/users'
+import { Account } from './lib/account.js'
+import { Client } from './lib/client.js'
+import { Games } from './lib/games.js'
+import { Relations } from './lib/relations.js'
+import { Users } from './lib/users.js'
 
-class Lichess {
-  _account: Account
-  _games: Games
-  _relations: Relations
-  _users: Users
-
-  constructor(token: string) {
-    const client = new Client(token)
-    this._account = new Account(client)
-    this._games = new Games(client)
-    this._relations = new Relations(client)
-    this._users = new Users(client)
-  }
-
-  get account() {
-    return this._account
-  }
-
-  get games() {
-    return this._games
-  }
-
-  get relations() {
-    return this._relations
-  }
-
-  get users() {
-    return this._users
+function Lichess(token: string) {
+  const client = Client(token)
+  return {
+    account: Account(client),
+    games: Games(client),
+    relations: Relations(client),
+    users: Users(client),
   }
 }
 

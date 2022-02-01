@@ -1,31 +1,33 @@
-import { Client } from './client'
-import { NdjsonParser } from './ndjson-parser'
+import { ClienteType } from './client.js'
+import { parse2 } from './ndjson-parser.js'
 
-class Relations {
-  _client: Client
+export type RelationType = {
+  followers: (username: string) => Promise<string>
+  following: (username: string) => Promise<string>
+}
 
-  constructor(client: Client) {
-    this._client = client
-  }
+export type RelationFunc = (client: ClienteType) => RelationType
 
-  followers(username: string) {
-    const path = `api/user/${username}/followers`
-    const headers = {
-      Accept: 'application/x-ndjson',
-    }
+const Relations: RelationFunc = (client: ClienteType): RelationType => {
+  const _client = client
+  return {
+    followers: (username: string) => {
+      const path = `api/user/${username}/followers`
+      const headers = {
+        Accept: 'application/x-ndjson',
+      }
+      const client = _client.get(path, headers)
+      return parse2(client)
+    },
 
-    const client = this._client.get(path, headers)
-    return new NdjsonParser().parse2(client)
-  }
-
-  following(username: string) {
-    const path = `api/user/${username}/following`
-    const headers = {
-      Accept: 'application/x-ndjson',
-    }
-
-    const client = this._client.get(path, headers)
-    return new NdjsonParser().parse2(client)
+    following: (username: string) => {
+      const path = `api/user/${username}/following`
+      const headers = {
+        Accept: 'application/x-ndjson',
+      }
+      const client = _client.get(path, headers)
+      return parse2(client)
+    },
   }
 }
 
