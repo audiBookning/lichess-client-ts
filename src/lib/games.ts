@@ -1,8 +1,8 @@
-import { AxiosRequestConfig } from 'axios'
+import type { AxiosRequestConfig } from 'axios'
 import { Client } from './client'
 import { NdjsonParser } from './ndjson-parser'
 
-export class Games {
+class Games {
   _client: Client
 
   constructor(client: Client) {
@@ -59,4 +59,4 @@ export class Games {
   }
 }
 
-module.exports = Games
+export { Games }

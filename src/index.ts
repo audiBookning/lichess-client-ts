@@ -4,7 +4,7 @@ import { Games } from './lib/games'
 import { Relations } from './lib/relations'
 import { Users } from './lib/users'
 
-export class Lichess {
+class Lichess {
   _account: Account
   _games: Games
   _relations: Relations
@@ -34,3 +34,5 @@ export class Lichess {
     return this._users
   }
 }
+
+export { Lichess }

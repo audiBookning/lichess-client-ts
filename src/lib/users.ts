@@ -1,7 +1,7 @@
 import { Client } from './client'
 import { NdjsonParser } from './ndjson-parser'
 
-export class Users {
+class Users {
   _client: Client
 
   constructor(client: Client) {
@@ -85,4 +85,4 @@ export class Users {
   }
 }
 
-module.exports = Users
+export { Users }

@@ -1,6 +1,6 @@
 import { Client } from './client'
 
-export class Account {
+class Account {
   _client: Client
 
   constructor(client: Client) {
@@ -69,3 +69,5 @@ export class Account {
       .then(({ data }) => JSON.parse(data))
   }
 }
+
+export { Account }

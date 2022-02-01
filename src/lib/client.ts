@@ -5,7 +5,7 @@ import axios, {
   Method,
 } from 'axios'
 
-export class Client {
+class Client {
   baseUrl: string
   token: string | null
   headers: AxiosRequestHeaders
@@ -52,3 +52,5 @@ export class Client {
     return axios(requestOptions)
   }
 }
+
+export { Client }
