@@ -5,7 +5,8 @@ class NdjsonParser {
     return body.trim().split(/\n/).map(JSON.parse)
   }
 
-  static parse2(stream: Promise<Response>) {
+  //
+  parse2(stream: Promise<Response>) {
     // TODO: just log for test
     return stream.then(readStream(onMessage)).then(onComplete)
   }

@@ -41,7 +41,7 @@ class Games {
     }
 
     const client = this._client.post(path, headers, idString, options)
-    return NdjsonParser.parse2(client)
+    return new NdjsonParser().parse2(client)
   }
 
   listByUser(username: string, params = {}) {
@@ -52,7 +52,7 @@ class Games {
     }
 
     const client = this._client.get(path, headers, params)
-    return NdjsonParser.parse2(client)
+    return new NdjsonParser().parse2(client)
   }
 }
 

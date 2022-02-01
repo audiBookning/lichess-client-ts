@@ -15,7 +15,7 @@ class Relations {
     }
 
     const client = this._client.get(path, headers)
-    return NdjsonParser.parse2(client)
+    return new NdjsonParser().parse2(client)
   }
 
   following(username: string) {
@@ -25,7 +25,7 @@ class Relations {
     }
 
     const client = this._client.get(path, headers)
-    return NdjsonParser.parse2(client)
+    return new NdjsonParser().parse2(client)
   }
 }
 
