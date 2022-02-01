@@ -20,6 +20,7 @@ class Users {
   }
 
   get(username: string) {
+    console.log('************** Lichess Users GET')
     const path = `api/user/${username}`
     const headers = {
       Accept: 'application/json',

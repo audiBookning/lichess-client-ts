@@ -44,7 +44,7 @@ const stream = fetch('https://lichess.org/api/tv/feed')
 // or any other ND-JSON endpoint such as:
 // const stream = fetch('https://lichess.org/api/games/user/neio',{headers:{Accept:'application/x-ndjson'}});
 
-const onMessage = (obj: any) => console.log(obj)
+const onMessage = (obj: any) => console.log('onMessage', obj)
 const onComplete = (buf: string) => {
   console.log('The stream has completed')
   return buf

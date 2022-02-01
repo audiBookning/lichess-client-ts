@@ -13,6 +13,7 @@ class Client {
   }
 
   get(path: string, headers: HeadersInit = {}, params: any = {}) {
+    console.log('************** Lichess Client GET')
     return this.request('GET', path, headers, null, params)
   }
 
@@ -32,6 +33,7 @@ class Client {
     body: BodyInit | null = null,
     params: any = {}
   ): Promise<Response> {
+    console.log('************** Lichess Client Request')
     const url = new URL(this.baseUrl + path)
     url.search = new URLSearchParams(params).toString()
 
@@ -43,7 +45,7 @@ class Client {
       body,
     }
     if (method == 'POST' && body) requestOptions.body = body
-
+    console.log(`Request url.toString(): `, url.toString())
     return fetch(url.toString(), requestOptions)
   }
 }
