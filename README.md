@@ -103,7 +103,7 @@ lichess.users.listByTeamId(team)
 ###### [Get live streamers](https://lichess.org/api#operation/streamerLive)
 
 ```js
-lichess.users.listStreams()
+lichess.users.liveStreams()
 ```
 
 ###### [Get titled users](https://lichess.org/api#operation/usersTitled)

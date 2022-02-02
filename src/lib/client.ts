@@ -9,6 +9,9 @@ export type ClienteType = {
     body: BodyInit | null,
     params?: any
   ) => Promise<Response>
+  /*
+   * TO BE IMPLEMENTED
+   */
 }
 
 export type ClienteFunc = (token?: string | null) => ClienteType
