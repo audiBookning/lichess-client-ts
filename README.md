@@ -15,8 +15,8 @@ npm install lichess-client
 ```
 
 ```js
-const Lichess = require("lichess-client");
-const lichess = new Lichess("apitoken");
+const Lichess = require('lichess-client')
+const lichess = new Lichess('apitoken')
 ```
 
 ### Usage
@@ -26,25 +26,25 @@ const lichess = new Lichess("apitoken");
 ###### [Get my profile](https://lichess.org/api#operation/accountMe)
 
 ```js
-lichess.account.account();
+lichess.account.account()
 ```
 
 ###### [Get my email address](https://lichess.org/api#operation/accountEmail)
 
 ```js
-lichess.account.email();
+lichess.account.email()
 ```
 
 ###### [Get my preferences](https://lichess.org/api#operation/account)
 
 ```js
-lichess.account.preferences();
+lichess.account.preferences()
 ```
 
 ###### [Get my kid mode status](https://lichess.org/api#operation/accountKid)
 
 ```js
-lichess.account.kid();
+lichess.account.kid()
 ```
 
 ###### [Turn on kid mode](https://lichess.org/api#operation/accountKidPost)
@@ -52,7 +52,7 @@ lichess.account.kid();
 **_Note_: You will need `preference:write` permissions for the associated API token**
 
 ```js
-lichess.account.kidOn();
+lichess.account.kidOn()
 ```
 
 ###### [Turn off kid mode](https://lichess.org/api#operation/accountKidPost)
@@ -60,58 +60,60 @@ lichess.account.kidOn();
 **_Note_: You will need `preference:write` permissions for the associated API token**
 
 ```js
-lichess.account.kidOff();
+lichess.account.kidOff()
 ```
 
 #### Users
 
-###### [Get real-time users status](https://lichess.org/api#operation/accountMe)
+###### [Get real-time users status](https://lichess.org/api#operation/apiUsersStatus)
 
 ```js
-let usernames = ["bestplayerever", "runnerup"];
-lichess.users.statusesByUsernames(usernames);
+let usernames = ['bestplayerever', 'runnerup']
+lichess.users.statusesByUsernames(usernames)
 ```
 
 ###### [Get user public data](https://lichess.org/api#operation/apiUser)
 
 ```js
-let username = "bestplayerever";
-lichess.users.get(username);
+let username = 'bestplayerever'
+lichess.users.get(username)
 ```
 
 ###### [Get user activity](https://lichess.org/api#operation/apiUserActivity)
 
 ```js
-let username = "bestplayerever";
-lichess.users.activityByUsername(username);
+let username = 'bestplayerever'
+lichess.users.activityByUsername(username)
 ```
 
 ###### [Get users by ID](https://lichess.org/api#operation/apiUsers)
 
 ```js
-let usernames = ["bestplayerever", "runnerup"];
-lichess.users.listByUsernames(usernames);
+let usernames = ['bestplayerever', 'runnerup']
+lichess.users.listByUsernames(usernames)
 ```
 
 ###### [Get members of a team](https://lichess.org/api#operation/teamIdUsers)
 
 ```js
-let team = "ateam";
-lichess.users.listByTeamId(team);
+let team = 'ateam'
+lichess.users.listByTeamId(team)
 ```
 
 ###### [Get live streamers](https://lichess.org/api#operation/streamerLive)
 
 ```js
-lichess.users.listStreams();
+lichess.users.listStreams()
 ```
 
 ###### [Get titled users](https://lichess.org/api#operation/usersTitled)
 
+'Does not exist in the Lichess API. Implemented here by returning a warning text'
+
 ```js
-let titles = ["GM", "WCM"];
-let options = { online: false };
-lichess.users.listByTitle(titles, options);
+let titles = ['GM', 'WCM']
+let options = { online: false }
+lichess.users.listByTitle(titles, options)
 ```
 
 #### Games
@@ -119,38 +121,38 @@ lichess.users.listByTitle(titles, options);
 ###### [Export one game](https://lichess.org/api#operation/gamePgn)
 
 ```js
-let gameId = "123";
-let options = { moves: true }; // all options specified in API docs
-lichess.games.get(gameId, options);
+let gameId = '123'
+let options = { moves: true } // all options specified in API docs
+lichess.games.get(gameId, options)
 ```
 
 ###### [Export games of a user](https://lichess.org/api#operation/apiGamesUser)
 
 ```js
-let username = "bestplayerever";
-let options = { max: 5 }; // all options specified in API docs
-lichess.games.listByUser(username, options);
+let username = 'bestplayerever'
+let options = { max: 5 } // all options specified in API docs
+lichess.games.listByUser(username, options)
 ```
 
 ###### [Export games by IDs](https://lichess.org/api#operation/gamesExportIds)
 
 ```js
-let ids = ["123", "456"];
-let options = { moves: true }; // all options specified in API docs
-lichess.games.listByIds(ids, options);
+let ids = ['123', '456']
+let options = { moves: true } // all options specified in API docs
+lichess.games.listByIds(ids, options)
 ```
 
 ###### [Get ongoing games](https://lichess.org/api#operation/apiAccountPlaying)
 
 ```js
-let options = { nb: 15 }; // all options specified in API docs
-lichess.games.current(options);
+let options = { nb: 15 } // all options specified in API docs
+lichess.games.current(options)
 ```
 
 ###### [Get current TV games](https://lichess.org/api#operation/tvChannels)
 
 ```js
-lichess.games.currentTv(options);
+lichess.games.currentTv(options)
 ```
 
 #### Relations
@@ -158,15 +160,17 @@ lichess.games.currentTv(options);
 ###### [Get users followed by a user](https://lichess.org/api#operation/apiUserFollowing)
 
 ```js
-let username = "bestplayerever";
-lichess.relations.following(username);
+let username = 'bestplayerever'
+lichess.relations.following(username)
 ```
 
 ###### [Get users who follow a user](https://lichess.org/api#operation/apiUserFollowers)
 
+'Does not exist in the Lichess API. Implemented here by returning a warning text'
+
 ```js
-let username = "bestplayerever";
-lichess.relations.followers(username);
+let username = 'bestplayerever'
+lichess.relations.followers(username)
 ```
 
 ### API coverage

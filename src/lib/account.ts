@@ -1,13 +1,20 @@
 import { Response } from 'node-fetch'
+import {
+  Email,
+  KidOkGet,
+  KidOkPost,
+  MyPreferences,
+  UserExtended,
+} from '../types/types.js'
 import type { ClienteType } from './client.js'
 
 export type AccountType = {
-  account: () => Promise<unknown>
-  email: () => Promise<unknown>
-  preferences: () => Promise<unknown>
-  kid(): Promise<any>
-  kidOn: () => Promise<unknown>
-  kidOff(): Promise<unknown>
+  account: () => Promise<UserExtended>
+  email: () => Promise<Email>
+  preferences: () => Promise<MyPreferences>
+  kid(): Promise<KidOkGet>
+  kidOn: () => Promise<KidOkPost>
+  kidOff(): Promise<KidOkPost>
 }
 
 export type AccountFunc = (client: ClienteType) => AccountType
@@ -21,9 +28,9 @@ const Account = (client: ClienteType): AccountType => {
       const headers = {
         Accept: 'application/json',
       }
-      return _client
-        .get(path, headers)
-        .then(async (response: Response) => await response.json())
+      return _client.get(path, headers).then(async (response: Response) => {
+        return (await response.json()) as Promise<UserExtended>
+      })
     },
 
     email: () => {
@@ -31,27 +38,27 @@ const Account = (client: ClienteType): AccountType => {
       const headers = {
         Accept: 'application/json',
       }
-      return _client
-        .get(path, headers)
-        .then(async (response: Response) => await response.json())
+      return _client.get(path, headers).then(async (response: Response) => {
+        return (await response.json()) as Promise<Email>
+      })
     },
     preferences: () => {
       const path = 'api/account/preferences'
       const headers = {
         Accept: 'application/json',
       }
-      return _client
-        .get(path, headers)
-        .then(async (response: Response) => await response.json())
+      return _client.get(path, headers).then(async (response: Response) => {
+        return (await response.json()) as Promise<MyPreferences>
+      })
     },
     kid(): Promise<any> {
       const path = 'api/account/kid'
       const headers = {
         Accept: 'application/json',
       }
-      return _client
-        .get(path, headers)
-        .then(async (response: Response) => await response.json())
+      return _client.get(path, headers).then(async (response: Response) => {
+        return (await response.json()) as Promise<KidOkGet>
+      })
     },
     kidOn: () => {
       const path = 'api/account/kid'
@@ -62,7 +69,9 @@ const Account = (client: ClienteType): AccountType => {
 
       return _client
         .post(path, headers, null, params)
-        .then(async (response: Response) => await response.json())
+        .then(async (response: Response) => {
+          return (await response.json()) as Promise<KidOkPost>
+        })
     },
     kidOff() {
       const path = 'api/account/kid'
@@ -70,9 +79,9 @@ const Account = (client: ClienteType): AccountType => {
         Accept: 'application/json',
       }
       const params = { v: false }
-      return _client
-        .post(path, headers, null, params)
-        .then(async response => await response.json())
+      return _client.post(path, headers, null, params).then(async response => {
+        return (await response.json()) as Promise<KidOkPost>
+      })
     },
   }
 }

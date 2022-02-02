@@ -12,12 +12,14 @@
   ],
   "license": "MIT",
   "scripts": {
+    "dev": "node --loader ts-node/esm src/index.ts",
     "build": "tsc",
     "prepare": "npm run build",
     "lint": "eslint --ext .js,.ts .",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
   },
   "dependencies": {
+    "dotenv": "^15.0.0",
     "node-fetch": "^3.2.0"
   },
   "devDependencies": {

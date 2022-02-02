@@ -1,3 +1,4 @@
+import 'dotenv/config'
 import { Account } from './lib/account.js'
 import { Client } from './lib/client.js'
 import { Games } from './lib/games.js'

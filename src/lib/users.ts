@@ -1,13 +1,23 @@
+import {
+  LichessUser,
+  LiveStream,
+  UserActivity,
+  UserExtended,
+  UserStatus,
+} from '../types/types.js'
 import { ClienteType } from './client.js'
 import { parse2 } from './ndjson-parser.js'
 
 export type UsersType = {
-  activityByUsername: (username: string) => Promise<unknown>
-  get: (username: string) => Promise<unknown>
-  listByTeamId: (teamId: string) => Promise<string>
-  listByUsernames: (usernames: string[]) => Promise<unknown>
-  liveStreams: () => Promise<unknown>
-  statusesByUsernames: (usernames: string[]) => Promise<unknown>
+  // TODO: create types for activityByUsername from src\types\user-activity.json
+  // REF: https://gist.github.com/ornicar/0ee2d2427cb74ed1a35e86f5ba09fabc
+  activityByUsername: (username: string) => Promise<UserActivity>
+  get: (username: string) => Promise<UserExtended>
+  listByTeamId: (teamId: string) => Promise<UserExtended>
+  listByUsernames: (usernames: string[]) => Promise<LichessUser[]>
+  liveStreams: () => Promise<LiveStream>
+  statusesByUsernames: (usernames: string[]) => Promise<UserStatus>
+  listByTitle: any
 }
 
 export type UserFunc = (client: ClienteType) => UsersType
@@ -16,14 +26,17 @@ const Users: UserFunc = (client: ClienteType): UsersType => {
   const _client = client
 
   return {
+    listByTitle: () => {
+      return 'WARNING: Not implemented. listByTitle does not exist in the Lichess API'
+    },
     activityByUsername: (username: string) => {
       const path = `api/user/${username}/activity`
       const headers = {
         Accept: 'application/json',
       }
-      return _client
-        .get(path, headers)
-        .then(async response => await response.json())
+      return _client.get(path, headers).then(async response => {
+        return (await response.json()) as Promise<UserActivity>
+      })
     },
     get: (username: string) => {
       console.log('************** Lichess Users GET')
@@ -31,9 +44,9 @@ const Users: UserFunc = (client: ClienteType): UsersType => {
       const headers = {
         Accept: 'application/json',
       }
-      return _client
-        .get(path, headers)
-        .then(async response => await response.json())
+      return _client.get(path, headers).then(async response => {
+        return (await response.json()) as Promise<UserExtended>
+      })
     },
     listByTeamId: (teamId: string) => {
       const path = `team/${teamId}/users`
@@ -41,7 +54,7 @@ const Users: UserFunc = (client: ClienteType): UsersType => {
         Accept: 'application/x-ndjson',
       }
       const client = _client.get(path, headers)
-      return parse2(client)
+      return parse2(client) as Promise<UserExtended>
     },
     listByUsernames: (usernames: string[]) => {
       const path = 'api/users'
@@ -51,16 +64,18 @@ const Users: UserFunc = (client: ClienteType): UsersType => {
       const usernameString = usernames.join(',')
       return _client
         .post(path, headers, usernameString)
-        .then(async response => await response.json())
+        .then(async response => {
+          return (await response.json()) as Promise<LichessUser[]>
+        })
     },
     liveStreams: () => {
       const path = 'streamer/live'
       const headers = {
         Accept: 'application/json',
       }
-      return _client
-        .get(path, headers)
-        .then(async response => await response.json())
+      return _client.get(path, headers).then(async response => {
+        return (await response.json()) as Promise<LiveStream>
+      })
     },
     statusesByUsernames: (usernames: string[]) => {
       const path = `api/users/status`
@@ -70,7 +85,9 @@ const Users: UserFunc = (client: ClienteType): UsersType => {
       }
       return _client
         .get(path, headers, { ids: usernameString })
-        .then(async response => await response.json())
+        .then(async response => {
+          return (await response.json()) as Promise<UserStatus>
+        })
     },
   }
 }
