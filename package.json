@@ -13,6 +13,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "node --loader ts-node/esm src/index.ts",
+    "test": "node --loader ts-node/esm src/test/index.ts",
     "build": "tsc",
     "prepare": "npm run build",
     "lint": "eslint --ext .js,.ts .",
