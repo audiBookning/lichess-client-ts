@@ -4,7 +4,7 @@
     "strict": true,
     "declaration": true,
     "outDir": "dist",
-    "module": "commonjs",
+    "module": "ES2020",
     "moduleResolution": "node",
     "incremental": true
   },

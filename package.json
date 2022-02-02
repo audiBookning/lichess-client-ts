@@ -2,7 +2,7 @@
   "name": "lichess-client",
   "version": "1.0.1",
   "description": "lichess API wrapper for node.js",
-  "main": "dist/index.js",
+  "exports": "./dist/index.js",
   "repository": "git@github.com:krmannix/lichess.git",
   "author": "Kevin Mannix <kevinrmannix@gmail.com>",
   "keywords": [
@@ -12,12 +12,15 @@
   ],
   "license": "MIT",
   "scripts": {
+    "dev": "node --loader ts-node/esm src/index.ts",
+    "test": "node --loader ts-node/esm src/test/index.ts",
     "build": "tsc",
     "prepare": "npm run build",
     "lint": "eslint --ext .js,.ts .",
     "format": "prettier --ignore-path .gitignore --write \"**/*.+(js|ts|json)\""
   },
   "dependencies": {
+    "dotenv": "^15.0.0",
     "node-fetch": "^3.2.0"
   },
   "devDependencies": {
@@ -29,6 +32,10 @@
     "prettier": "^2.5.1",
     "ts-node": "^10.4.0",
     "typescript": "^4.5.5"
+  },
+  "type": "module",
+  "engines": {
+    "node": "^12.20.0 || >=14.13.1"
   },
   "files": [
     "dist/**/*"

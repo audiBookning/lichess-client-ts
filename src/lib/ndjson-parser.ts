@@ -1,18 +1,19 @@
 import fetch, { Response } from 'node-fetch'
 
-class NdjsonParser {
+/* class NdjsonParser {
   static parse(body: any) {
     return body.trim().split(/\n/).map(JSON.parse)
   }
 
   //
-  parse2(stream: Promise<Response>) {
-    // TODO: just log for test
-    return stream.then(readStream(onMessage)).then(onComplete)
-  }
+} */
+
+function parse2(stream: Promise<Response>) {
+  // TODO: just log for test
+  return stream.then(readStream(onMessage)).then(onComplete)
 }
 
-export { NdjsonParser }
+export { parse2 }
 export { readStream }
 
 // REF: https://gist.github.com/ornicar/a097406810939cf7be1df8ea30e94f3e
@@ -45,7 +46,9 @@ const stream = fetch('https://lichess.org/api/tv/feed')
 // or any other ND-JSON endpoint such as:
 // const stream = fetch('https://lichess.org/api/games/user/neio',{headers:{Accept:'application/x-ndjson'}});
 
-const onMessage = (obj: any) => console.log('onMessage', obj)
+const onMessage = (obj: any) => {
+  /* console.log('onMessage', obj) */
+}
 const onComplete = (buf: string) => {
   console.log('The stream has completed')
   return buf
