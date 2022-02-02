@@ -1,7 +1,13 @@
 # lichess-client-ts
 
-♟️ Typescript node.js lichess API wrapper ♙
-based on [lichess-client](https://github.com/krmannix/lichess-client)
+♟️ Typescript node.js lichess API wrapper ♙ based on [lichess-client](https://github.com/krmannix/lichess-client)
+
+This package was created as part of an hobby project and there is no plan to maintain it. Anyone is welcome to fork it.
+
+The main branch uses a more "functional" approach than the original that used Classes and is the focus of the development.
+There is a [class-version](https://github.com/audiBookning/lichess-client-ts/tree/class-version) branch that is a more literal typescript translation of the original.
+
+## The following is from the original package ReadMe content with just some small corrections.
 
 ### Getting Started
 
@@ -108,7 +114,7 @@ lichess.users.liveStreams()
 
 ###### [Get titled users](https://lichess.org/api#operation/usersTitled)
 
-'Does not exist in the Lichess API. Implemented here by returning a warning text'
+\*\*_Note_: 'Does not exist in the Lichess API. Implemented here by returning a warning text'
 
 ```js
 let titles = ['GM', 'WCM']
@@ -166,7 +172,7 @@ lichess.relations.following(username)
 
 ###### [Get users who follow a user](https://lichess.org/api#operation/apiUserFollowers)
 
-'Does not exist in the Lichess API. Implemented here by returning a warning text'
+\*\*_Note_: 'Does not exist in the Lichess API. Implemented here by returning a warning text'
 
 ```js
 let username = 'bestplayerever'
