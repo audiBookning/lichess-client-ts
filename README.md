@@ -114,7 +114,7 @@ lichess.users.liveStreams()
 
 ###### [Get titled users](https://lichess.org/api#operation/usersTitled)
 
-\*\*_Note_: 'Does not exist in the Lichess API. Implemented here by returning a warning text'
+**_Note_: 'Does not exist in the Lichess API. Implemented here by returning a warning text'**
 
 ```js
 let titles = ['GM', 'WCM']
@@ -172,7 +172,7 @@ lichess.relations.following(username)
 
 ###### [Get users who follow a user](https://lichess.org/api#operation/apiUserFollowers)
 
-\*\*_Note_: 'Does not exist in the Lichess API. Implemented here by returning a warning text'
+**_Note_: 'Does not exist in the Lichess API. Implemented here by returning a warning text'**
 
 ```js
 let username = 'bestplayerever'
