@@ -2,13 +2,13 @@
   "compilerOptions": {
     "target": "es5",
     "strict": true,
-    "declaration": true,
+    //"declaration": true,
     "outDir": "dist",
     "module": "ES2020",
     "moduleResolution": "node",
     "incremental": true
   },
-  "include": ["src/**/*", "src/**/*.d.ts"],
+  "include": ["src/**/*"],
   "exclude": ["node_modules"],
   "files": ["src/types/types.ts"]
 }

@@ -9,7 +9,7 @@
       "./dist/types/"
     ]
   },
-  "types": "./dist/types/types.ts",
+  "types": "./dist/index.d.ts",
   "files": [
     "dist/**/*"
   ],

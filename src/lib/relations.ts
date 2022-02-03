@@ -1,6 +1,6 @@
-import { UserExtended } from '../../types/types.js'
-import { ClienteType } from '../client.js'
-import { parse2 } from '../ndjson-parser.js'
+import { UserExtended } from '../types/types.js'
+import { ClienteType } from './client.js'
+import { parse2 } from './ndjson-parser.js'
 
 export type RelationType = {
   /**
