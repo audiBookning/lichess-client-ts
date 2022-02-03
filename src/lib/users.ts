@@ -1,6 +1,5 @@
 import {
   LichessUser,
-  LiveStream,
   UserActivity,
   UserExtended,
   UserStatus,
@@ -61,7 +60,7 @@ export type UsersType = {
    * @request GET:/streamer/live
    * @response `200` `({ id?: string, name?: string, title?: string | null, online?: boolean | null, patron?: boolean | null })[]` The list of live streamers and their respective information.
    */
-  liveStreams: () => Promise<LiveStream>
+  liveStreams: () => Promise<UserStatus>
   /**
    * @description Read the `online`, `playing` and `streaming` flags of several users. This API is very fast and cheap on lichess side. So you can call it quite often (like once every 5 seconds). Use it to track players and know when they're connected on lichess and playing games.
    *
@@ -217,7 +216,7 @@ const Users: UserFunc = (client: ClienteType): UsersType => {
         Accept: 'application/json',
       }
       return _client.get(path, headers).then(async response => {
-        return (await response.json()) as Promise<LiveStream>
+        return (await response.json()) as Promise<UserStatus>
       })
     },
     statusesByUsernames: (usernames: string[]) => {

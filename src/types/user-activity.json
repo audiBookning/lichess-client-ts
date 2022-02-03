@@ -63,32 +63,6 @@
             "user": "wixkid",
             "rating": 1775
           }
-        },
-        {
-          "id": "YdaQfiVN",
-          "color": "black",
-          "url": "/YdaQfiVN/black",
-          "variant": "standard",
-          "speed": "correspondence",
-          "perf": "correspondence",
-          "rated": false,
-          "opponent": {
-            "user": "kickdarkness",
-            "rating": 2008
-          }
-        },
-        {
-          "id": "sgJmN0Tp",
-          "color": "white",
-          "url": "/sgJmN0Tp/white",
-          "variant": "standard",
-          "speed": "correspondence",
-          "perf": "correspondence",
-          "rated": false,
-          "opponent": {
-            "user": "gerobum",
-            "rating": 1831
-          }
         }
       ]
     },
@@ -114,19 +88,6 @@
           "opponent": {
             "user": "wixkid",
             "rating": 1775
-          }
-        },
-        {
-          "id": "DkYfPA76",
-          "color": "white",
-          "url": "/DkYfPA76/white",
-          "variant": "standard",
-          "speed": "correspondence",
-          "perf": "correspondence",
-          "rated": true,
-          "opponent": {
-            "user": "d3partures",
-            "rating": 1743
           }
         }
       ]

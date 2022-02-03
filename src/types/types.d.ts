@@ -86,7 +86,7 @@ export declare type UsersType = {
    * @request GET:/streamer/live
    * @response `200` `({ id?: string, name?: string, title?: string | null, online?: boolean | null, patron?: boolean | null })[]` The list of live streamers and their respective information.
    */
-  liveStreams: () => Promise<LiveStream>
+  liveStreams: () => Promise<UserStatus>
   /**
    * @description Read the `online`, `playing` and `streaming` flags of several users. This API is very fast and cheap on lichess side. So you can call it quite often (like once every 5 seconds). Use it to track players and know when they're connected on lichess and playing games.
    *
@@ -262,200 +262,145 @@ declare const Account: (client: ClienteType) => AccountType
  */
 export type UserActivity = any
 
-// TODO: implement the type
+// INFO: adapted from the example
 /**
  * @example
- * {
-        Bot: {
-            user: {
-            id: 'leelachess',
-            name: 'LeelaChess',
-            title: 'BOT',
-            },
-            rating: 2660,
-            gameId: 'Zznv9MIl',
-        },
-        Blitz: {
-            user: {
-            id: 'lekkerkortook',
-            name: 'LekkerKortOok',
-            },
-            rating: 2603,
-            gameId: 'hTJ4v7Mp',
-        },
-        'Racing Kings': {
-            user: {
-            id: 'chesslo21',
-            name: 'chesslo21',
-            },
-            rating: 2123,
-            gameId: 'lgCDl5Of',
-        },
-        UltraBullet: {
-            user: {
-            id: 'farmville',
-            name: 'Farmville',
-            },
-            rating: 2338,
-            gameId: 'NEY6OQ32',
-        },
-        Bullet: {
-            user: {
-            id: 'nurmibrah',
-            name: 'nurmiBrah',
-            },
-            rating: 2499,
-            gameId: '5LgyE516',
-        },
-        Classical: {
-            user: {
-            id: 'holden_m_j_thomas',
-            name: 'Holden_M_J_Thomas',
-            },
-            rating: 1806,
-            gameId: 'k3oLby6N',
-        },
-        'Three-check': {
-            user: {
-            id: 'pepellou',
-            name: 'pepellou',
-            patron: true,
-            },
-            rating: 1978,
-            gameId: 'Og5RCvmu',
-        },
-        Antichess: {
-            user: {
-            id: 'maria-bakkar',
-            name: 'maria-bakkar',
-            },
-            rating: 2103,
-            gameId: 'toCr41yx',
-        },
-        Computer: {
-            user: {
-            id: 'oh_my_goat_im_so_bat',
-            name: 'oh_my_goat_Im_so_bat',
-            },
-            rating: 2314,
-            gameId: 'TkI4qZxu',
-        },
-        Horde: {
-            user: {
-            id: 'habitualchess',
-            name: 'HabitualChess',
-            },
-            rating: 1803,
-            gameId: 'oMofN63H',
-        },
-        Rapid: {
-            user: {
-            id: 'denpayd',
-            name: 'DenpaYD',
-            },
-            rating: 2289,
-            gameId: 'IcWOl8ee',
-        },
-        Atomic: {
-            user: {
-            id: 'meetyourdemise',
-            name: 'MeetYourDemise',
-            },
-            rating: 2210,
-            gameId: 'tvMxtCMN',
-        },
-        Crazyhouse: {
-            user: {
-            id: 'mathace',
-            name: 'mathace',
-            },
-            rating: 2397,
-            gameId: 'i3gTZlUb',
-        },
-        Chess960: {
-            user: {
-            id: 'voja_7',
-            name: 'voja_7',
-            },
-            rating: 1782,
-            gameId: 'lrXLcedu',
-        },
-        'King of the Hill': {
-            user: {
-            id: 'nadime',
-            name: 'Nadime',
-            },
-            rating: 1500,
-            gameId: 'DsQn8aEV',
-        },
-        'Top Rated': {
-            user: {
-            id: 'lekkerkortook',
-            name: 'LekkerKortOok',
-            },
-            rating: 2603,
-            gameId: 'hTJ4v7Mp',
-        },
-    }
+ *
  */
-export type CurrentTvGames = any
+export type CurrentTvGames = {
+  Bot: CurrentTvGamesPerf
+  Blitz: CurrentTvGamesPerf
+  'Racing Kings': CurrentTvGamesPerf
+  UltraBullet: CurrentTvGamesPerf
+  Bullet: CurrentTvGamesPerf
+  Classical: CurrentTvGamesPerf
+  'Three-check': CurrentTvGamesPerf
+  Antichess: CurrentTvGamesPerf
+  Computer: CurrentTvGamesPerf
+  Horde: CurrentTvGamesPerf
+  Rapid: CurrentTvGamesPerf
+  Atomic: CurrentTvGamesPerf
+  Crazyhouse: CurrentTvGamesPerf
+  Chess960: CurrentTvGamesPerf
+  'King of the Hill': CurrentTvGamesPerf
+  'Top Rated': CurrentTvGamesPerf
+}
 
-// TODO: implement the type
+export type CurrentTvGamesPerf = {
+  user: UserStatus
+  /** @example 1978 */
+  rating: number
+  /** @example Og5RCvmu */
+  gameId: string
+}
+
+// INFO: adapted from the example
 /**
  * @example
- * {
-        nowPlaying: [
-            {
-            fullId: 'knbD9FPUqhra',
-            gameId: 'knbD9FPU',
-            fen: 'rnbqkbnr/pp3pp1/8/3p3p/1PpPp3/P1P1P3/5PPP/RNBQKBNR',
-            color: 'white',
-            lastMove: 'c5c4',
-            variant: {
-                key: 'standard',
-                name: 'Standard',
-            },
-            speed: 'correspondence',
-            perf: 'correspondence',
-            rated: true,
-            opponent: {
-                id: 'thibot',
-                username: 'BOT thibot',
-                rating: 1500,
-            },
-            isMyTurn: true,
-            },
-        ],
-    }
  */
-export type OngoingGames = any
+export type OngoingGames = {
+  nowPlaying?: NowPlaying[]
+}
 
-// TODO: implement the type
+export type NowPlaying = {
+  /** @example knbD9FPUqhra */
+  fullId: string
+  /** @example knbD9FPU */
+  gameId: string
+  /** @example rnbqkbnr/pp3pp1/8/3p3p/1PpPp3/P1P1P3/5PPP/RNBQKBNR */
+  fen: string
+  /** @example white */
+  color: string
+  /** @example c5c4 */
+  lastMove: string
+  variant: Variant
+  /** @example correspondence */
+  speed: string
+  /** @example correspondence */
+  perf: string
+  rated: boolean
+  opponent: Opponent
+  isMyTurn: boolean
+}
+
+export type Variant = {
+  /** @example standard */
+  key: string
+  /** @example standard */
+  name: string
+  /** @example Std */
+  short?: string
+}
+export type Opponent = {
+  /** @example thibot */
+  id: string
+  /** @example BOT thibot */
+  username: string
+  /** @example 1500 */
+  rating: number
+}
+
+// INFO: adapted from the example
 /**
- * @example {"id":"VU0nyvsW","url":"https://lichess.org/VU0nyvsW",
- * "urlWhite":"https://lichess.org/VU0nyvsW?color=white",
- * "urlBlack":"https://lichess.org/VU0nyvsW?color=black",
- * "color":"random","direction":"out",
- * "timeControl": {"increment":2,"limit":300,"show":"5+2","type":"clock"},
- * "variant":{"key":"standard","name":"Standard","short":"Std"},
- * "challenger":{"id":"thibot","name":"thibot","online":true,
- * "provisional":false,"rating":1940,"title":"BOT"},
- * "destUser":{"id":"leelachess","name":"LeelaChess",
- * "online":true,"provisional":true,"rating":2670,"title":"BOT"},
- * "perf":{"icon":";","name":"Correspondence"},"rated":true,
- * "speed":"blitz","status":"created"}
+ * @example
  */
-export type ChallengeOpenJson = any
+export type ChallengeOpenJson = {
+  /** @example VU0nyvsW */
+  id: string
+  /** @example https://lichess.org/VU0nyvsW */
+  url: string
+  /** @example https://lichess.org/VU0nyvsW?color=white */
+  urlWhite: string
+  /** @example https://lichess.org/VU0nyvsW?color=black */
+  urlBlack: string
+  /** @example random */
+  color: string
+  /** @example out */
+  direction: string
+  timeControl: TimeControl
+  variant: Variant
+  challenger: Challenger
+  destUser: Challenger
+  perf: ChallengePerf
+  rated: true
+  /** @example blitz */
+  speed: string
+  /** @example created */
+  status: string
+}
+
+export type Challenger = {
+  /** @example thibot */
+  id: string
+  /** @example thibot */
+  name: string
+  online: true
+  provisional: false
+  /** @example 1940 */
+  rating: number
+  /** @example BOT */
+  title: string
+}
+
+export type ChallengePerf = {
+  /** @example ; */
+  icon: string
+  /** @example Correspondence */
+  name: string
+}
+
+export type TimeControl = {
+  /** @example 2 */
+  increment: number
+  /** @example 300 */
+  limit: number
+  /** @example 5+2 */
+  show: string
+  /** @example clock */
+  type: string
+}
 
 export type GamePgn = string
-
-export type LiveStream = {
-  id?: string
-  name?: string
-  title?: string | null
-  online?: boolean | null
-  patron?: boolean | null
-}
 
 export type UserStatus = {
   id?: string
@@ -476,183 +421,61 @@ export type KidOkPost = {
 export type MyPreferences = { prefs?: UserPreferences; language?: string }
 
 export type UserPreferences = {
-  /** @example true */
   dark?: boolean
-
   /** @example false */
   transp?: boolean
-
   /** @format uri */
   bgImg?: string
-
   /** @example false */
   is3d?: boolean
-  theme?:
-    | 'blue'
-    | 'blue2'
-    | 'blue3'
-    | 'blue-marble'
-    | 'canvas'
-    | 'wood'
-    | 'wood2'
-    | 'wood3'
-    | 'wood4'
-    | 'maple'
-    | 'maple2'
-    | 'brown'
-    | 'leather'
-    | 'green'
-    | 'marble'
-    | 'green-plastic'
-    | 'grey'
-    | 'metal'
-    | 'olive'
-    | 'newspaper'
-    | 'purple'
-    | 'purple-diag'
-    | 'pink'
-    | 'ic'
-  pieceSet?:
-    | 'cburnett'
-    | 'merida'
-    | 'alpha'
-    | 'pirouetti'
-    | 'chessnut'
-    | 'chess7'
-    | 'reillycraig'
-    | 'companion'
-    | 'riohacha'
-    | 'kosal'
-    | 'leipzig'
-    | 'fantasy'
-    | 'spatial'
-    | 'california'
-    | 'pixel'
-    | 'maestro'
-    | 'fresca'
-    | 'cardinal'
-    | 'gioco'
-    | 'tatiana'
-    | 'staunty'
-    | 'governor'
-    | 'dubrovny'
-    | 'icpieces'
-    | 'shapes'
-    | 'letter'
-  theme3d?:
-    | 'Black-White-Aluminium'
-    | 'Brushed-Aluminium'
-    | 'China-Blue'
-    | 'China-Green'
-    | 'China-Grey'
-    | 'China-Scarlet'
-    | 'Classic-Blue'
-    | 'Gold-Silver'
-    | 'Light-Wood'
-    | 'Power-Coated'
-    | 'Rosewood'
-    | 'Marble'
-    | 'Wax'
-    | 'Jade'
-    | 'Woodi'
-  pieceSet3d?:
-    | 'Basic'
-    | 'Wood'
-    | 'Metal'
-    | 'RedVBlue'
-    | 'ModernJade'
-    | 'ModernWood'
-    | 'Glass'
-    | 'Trimmed'
-    | 'Experimental'
-    | 'Staunton'
-    | 'CubesAndPi'
-  soundSet?:
-    | 'silent'
-    | 'standard'
-    | 'piano'
-    | 'nes'
-    | 'sfx'
-    | 'futuristic'
-    | 'robot'
-    | 'music'
-    | 'speech'
-
+  theme?: Theme
+  pieceSet?: PieceSet
+  theme3d?: Theme3d
+  pieceSet3d?: PieceSet3d
+  soundSet?: SoundSet
   /** @example 0 */
   blindfold?: number
-
   /** @example 2 */
   autoQueen?: number
-
   /** @example 2 */
   autoThreefold?: number
-
   /** @example 3 */
   takeback?: number
-
   /** @example 3 */
   moretime?: number
-
   /** @example 1 */
   clockTenths?: number
-
-  /** @example true */
   clockBar?: boolean
-
-  /** @example true */
   clockSound?: boolean
-
-  /** @example true */
   premove?: boolean
-
   /** @example 2 */
   animation?: number
-
-  /** @example true */
   captured?: boolean
-
-  /** @example true */
   follow?: boolean
-
-  /** @example true */
   highlight?: boolean
-
-  /** @example true */
   destination?: boolean
-
   /** @example 2 */
   coords?: number
-
   /** @example 2 */
   replay?: number
-
   /** @example 4 */
   challenge?: number
-
   /** @example 3 */
   message?: number
-
   /** @example 2 */
   coordColor?: number
-
   /** @example 4 */
   submitMove?: number
-
   /** @example 1 */
   confirmResign?: number
-
   /** @example 1 */
   insightShare?: number
-
   /** @example 0 */
   keyboardMove?: number
-
   /** @example 0 */
   zen?: number
-
   /** @example 2 */
   moveEvent?: number
-
   /** @example 1 */
   rookCastle?: number
 }
@@ -674,40 +497,28 @@ export type UserExtended = LichessUser & {
 export type Count = {
   /** @example 9265 */
   all?: number
-
   /** @example 7157 */
   rated?: number
-
   /** @example 531 */
   ai?: number
-
   /** @example 340 */
   draw?: number
-
   /** @example 331 */
   drawH?: number
-
   /** @example 4480 */
   loss?: number
-
   /** @example 4207 */
   lossH?: number
-
   /** @example 4440 */
   win?: number
-
   /** @example 4378 */
   winH?: number
-
   /** @example 71 */
   bookmark?: number
-
   /** @example 6 */
   playing?: number
-
   /** @example 66 */
   import?: number
-
   /** @example 0 */
   me?: number
 }
@@ -715,21 +526,18 @@ export type Count = {
 export type Perf = {
   /** @example 2945 */
   games?: number
-
   /** @example 1609 */
   rating?: number
-
   /** @example 60 */
   rd?: number
-
   /** @example -22 */
   prog?: number
   prov?: boolean
 }
+
 export type StormPerf = {
   /** @example 44 */
   runs?: number
-
   /** @example 61 */
   score?: number
 }
@@ -754,25 +562,18 @@ export type Profile = {
   /** @example EC */
   country?: string
   location?: string
-
   /** @example Free bugs! */
   bio?: string
-
   /** @example Thibault */
   firstName?: string
-
   /** @example Duplessis */
   lastName?: string
-
   /** @example 1500 */
   fideRating?: number
-
   /** @example 1500 */
   uscfRating?: number
-
   /** @example 1500 */
   ecfRating?: number
-
   /**
    * @example github.com/ornicar
    * twitter.com/ornicar
@@ -783,7 +584,6 @@ export type Profile = {
 export type PlayTime = {
   /** @example 3296897 */
   total?: number
-
   /** @example 12134 */
   tv?: number
 }
@@ -791,31 +591,18 @@ export type PlayTime = {
 export type LichessUser = {
   /** @example georges */
   id?: string
-
   /** @example Georges */
   username?: string
-
-  /** @example true */
   online?: boolean
   perfs?: Perfs
-
   /** @example 1290415680000 */
   createdAt?: number
-
-  /** @example false */
   disabled?: boolean
-
-  /** @example false */
   tosViolation?: boolean
   profile?: Profile
-
   /** @example 1522636452014 */
   seenAt?: number
-
-  /** @example true */
   patron?: boolean
-
-  /** @example true */
   verified?: boolean
   playTime?: PlayTime
   title?: Title
@@ -834,4 +621,101 @@ export enum Title {
   WNM = 'WNM',
   LM = 'LM',
   BOT = 'BOT',
+}
+
+export enum Theme {
+  'blue',
+  'blue2',
+  'blue3',
+  'blue-marble',
+  'canvas',
+  'wood',
+  'wood2',
+  'wood3',
+  'wood4',
+  'maple',
+  'maple2',
+  'brown',
+  'leather',
+  'green',
+  'marble',
+  'green-plastic',
+  'grey',
+  'metal',
+  'olive',
+  'newspaper',
+  'purple',
+  'purple-diag',
+  'pink',
+  'ic',
+}
+
+export enum PieceSet {
+  'cburnett',
+  'merida',
+  'alpha',
+  'pirouetti',
+  'chessnut',
+  'chess7',
+  'reillycraig',
+  'companion',
+  'riohacha',
+  'kosal',
+  'leipzig',
+  'fantasy',
+  'spatial',
+  'california',
+  'pixel',
+  'maestro',
+  'fresca',
+  'cardinal',
+  'gioco',
+  'tatiana',
+  'staunty',
+  'governor',
+  'dubrovny',
+  'icpieces',
+  'shapes',
+  'letter',
+}
+export enum Theme3d {
+  'Black-White-Aluminium',
+  'Brushed-Aluminium',
+  'China-Blue',
+  'China-Green',
+  'China-Grey',
+  'China-Scarlet',
+  'Classic-Blue',
+  'Gold-Silver',
+  'Light-Wood',
+  'Power-Coated',
+  'Rosewood',
+  'Marble',
+  'Wax',
+  'Jade',
+  'Woodi',
+}
+export enum PieceSet3d {
+  'Basic',
+  'Wood',
+  'Metal',
+  'RedVBlue',
+  'ModernJade',
+  'ModernWood',
+  'Glass',
+  'Trimmed',
+  'Experimental',
+  'Staunton',
+  'CubesAndPi',
+}
+export enum SoundSet {
+  'silent',
+  'standard',
+  'piano',
+  'nes',
+  'sfx',
+  'futuristic',
+  'robot',
+  'music',
+  'speech',
 }
