@@ -2,12 +2,12 @@
   "compilerOptions": {
     "target": "es5",
     "strict": true,
-    "declaration": true,
+    //"declaration": true,
     "outDir": "dist",
     "module": "ES2020",
     "moduleResolution": "node",
     "incremental": true
   },
-  "include": ["src"],
-  "exclude": ["node_modules"]
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"],
 }

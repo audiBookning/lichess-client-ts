@@ -1,8 +1,19 @@
 {
-  "name": "lichess-client",
+  "name": "lichess-client-ts",
   "version": "1.0.1",
-  "description": "lichess API wrapper for node.js",
-  "exports": "./dist/index.js",
+  "description": "lichess typescript API wrapper for node.js",
+  "exports": {
+    ".": [
+      "./dist/index.js",
+      "./dist/lib/",
+      "./dist/types/"
+    ]
+  },
+  "types": "src/types/types.d.ts",
+  "files": [
+    "dist/**/*",
+    "src/types/types.d.ts"
+  ],
   "repository": "git@github.com:krmannix/lichess.git",
   "author": "Kevin Mannix <kevinrmannix@gmail.com>",
   "keywords": [
@@ -36,8 +47,5 @@
   "type": "module",
   "engines": {
     "node": "^12.20.0 || >=14.13.1"
-  },
-  "files": [
-    "dist/**/*"
-  ]
+  }
 }
