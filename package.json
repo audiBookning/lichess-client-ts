@@ -9,9 +9,10 @@
       "./dist/types/"
     ]
   },
-  "types": "./dist/types/types.ts",
+  "types": "src/types/types.d.ts",
   "files": [
-    "dist/**/*"
+    "dist/**/*",
+    "src/types/types.d.ts"
   ],
   "repository": "git@github.com:krmannix/lichess.git",
   "author": "Kevin Mannix <kevinrmannix@gmail.com>",
