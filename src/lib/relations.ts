@@ -64,7 +64,7 @@ const Relations: RelationFunc = (client: ClienteType): RelationType => {
         Accept: 'application/x-ndjson',
       }
       const client = _client.get(path, headers)
-      return parse2(client) as Promise<UserExtended>
+      return parse2(client) as Promise<unknown> as Promise<UserExtended>
     },
   }
 }

@@ -92,7 +92,7 @@ const Account = (client: ClienteType): AccountType => {
         Accept: 'application/json',
       }
       return _client.get(path, headers).then(async (response: Response) => {
-        return (await response.json()) as Promise<UserExtended>
+        return (await response.json()) as Promise<unknown> as Promise<UserExtended>
       })
     },
 
@@ -102,7 +102,7 @@ const Account = (client: ClienteType): AccountType => {
         Accept: 'application/json',
       }
       return _client.get(path, headers).then(async (response: Response) => {
-        return (await response.json()) as Promise<Email>
+        return (await response.json()) as Promise<unknown> as Promise<Email>
       })
     },
     preferences: () => {
@@ -111,7 +111,7 @@ const Account = (client: ClienteType): AccountType => {
         Accept: 'application/json',
       }
       return _client.get(path, headers).then(async (response: Response) => {
-        return (await response.json()) as Promise<MyPreferences>
+        return (await response.json()) as Promise<unknown> as Promise<MyPreferences>
       })
     },
     kid(): Promise<any> {
@@ -120,7 +120,7 @@ const Account = (client: ClienteType): AccountType => {
         Accept: 'application/json',
       }
       return _client.get(path, headers).then(async (response: Response) => {
-        return (await response.json()) as Promise<KidOkGet>
+        return (await response.json()) as Promise<unknown> as Promise<KidOkGet>
       })
     },
     kidOn: () => {
@@ -133,7 +133,7 @@ const Account = (client: ClienteType): AccountType => {
       return _client
         .post(path, headers, null, params)
         .then(async (response: Response) => {
-          return (await response.json()) as Promise<KidOkPost>
+          return (await response.json()) as Promise<unknown> as Promise<KidOkPost>
         })
     },
     kidOff() {
@@ -143,7 +143,7 @@ const Account = (client: ClienteType): AccountType => {
       }
       const params = { v: false }
       return _client.post(path, headers, null, params).then(async response => {
-        return (await response.json()) as Promise<KidOkPost>
+        return (await response.json()) as Promise<unknown> as Promise<KidOkPost>
       })
     },
   }

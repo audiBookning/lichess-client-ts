@@ -177,7 +177,7 @@ const Users: UserFunc = (client: ClienteType): UsersType => {
         Accept: 'application/json',
       }
       return _client.get(path, headers).then(async response => {
-        return (await response.json()) as Promise<UserActivity>
+        return (await response.json()) as Promise<unknown> as Promise<UserActivity>
       })
     },
     get: (username: string) => {
@@ -187,7 +187,7 @@ const Users: UserFunc = (client: ClienteType): UsersType => {
         Accept: 'application/json',
       }
       return _client.get(path, headers).then(async response => {
-        return (await response.json()) as Promise<UserExtended>
+        return (await response.json()) as Promise<unknown> as Promise<UserExtended>
       })
     },
     listByTeamId: (teamId: string) => {
@@ -196,7 +196,7 @@ const Users: UserFunc = (client: ClienteType): UsersType => {
         Accept: 'application/x-ndjson',
       }
       const client = _client.get(path, headers)
-      return parse2(client) as Promise<UserExtended>
+      return parse2(client) as Promise<unknown> as Promise<UserExtended>
     },
     listByUsernames: (usernames: string[]) => {
       const path = 'api/users'
@@ -207,7 +207,9 @@ const Users: UserFunc = (client: ClienteType): UsersType => {
       return _client
         .post(path, headers, usernameString)
         .then(async response => {
-          return (await response.json()) as Promise<LichessUser[]>
+          return (await response.json()) as Promise<unknown> as Promise<
+            LichessUser[]
+          >
         })
     },
     liveStreams: () => {
@@ -216,7 +218,7 @@ const Users: UserFunc = (client: ClienteType): UsersType => {
         Accept: 'application/json',
       }
       return _client.get(path, headers).then(async response => {
-        return (await response.json()) as Promise<UserStatus>
+        return (await response.json()) as Promise<unknown> as Promise<UserStatus>
       })
     },
     statusesByUsernames: (usernames: string[]) => {
@@ -228,7 +230,7 @@ const Users: UserFunc = (client: ClienteType): UsersType => {
       return _client
         .get(path, headers, { ids: usernameString })
         .then(async response => {
-          return (await response.json()) as Promise<UserStatus>
+          return (await response.json()) as Promise<unknown> as Promise<UserStatus>
         })
     },
   }
