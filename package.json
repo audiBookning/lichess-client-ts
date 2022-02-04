@@ -5,8 +5,8 @@
   "exports": {
     ".": [
       "./dist/index.js",
-      "./dist/lib/",
-      "./dist/types/"
+      "./dist/lib",
+      "./dist/types"
     ]
   },
   "types": "src/types/types.d.ts",
